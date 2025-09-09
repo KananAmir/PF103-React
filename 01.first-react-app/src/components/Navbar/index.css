@@ -1,0 +1,25 @@
+header{
+    background-color: olivedrab;
+
+}
+.header h2{
+    color: brown;
+    font-size: 2rem;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.header nav ul{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.header nav ul a{
+    color: brown;
+    font-size: 1rem;
+}
