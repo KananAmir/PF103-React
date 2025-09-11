@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import Button from "../Button"
 
 const ProductCard = ({ product }) => {
@@ -28,6 +29,15 @@ const ProductCard = ({ product }) => {
             </div>
         </div>
     )
+}
+
+ProductCard.propTypes = {
+    product: PropTypes.shape({
+        image: PropTypes.string,
+        price: PropTypes.number,
+        description: PropTypes.string,
+        title: PropTypes.string,
+    })
 }
 
 export default ProductCard

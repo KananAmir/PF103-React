@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import ProductCard from "../ProductCard";
 
 function Products({ products }) {
@@ -16,6 +17,10 @@ function Products({ products }) {
             </div>
         </div>
     )
+}
+
+Products.propTypes = {
+    products: PropTypes.array
 }
 
 export default Products

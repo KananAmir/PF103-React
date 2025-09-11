@@ -1,8 +1,8 @@
-
+import PropTypes from "prop-types"
 // const Greeting = (props) => {
-    
+
 //   console.log(props);
-    
+
 //   return (
 //     <>
 //       <p>Hello, {props.user}</p>
@@ -15,9 +15,9 @@
 
 
 // const Greeting = (props) => {
-    
+
 //   const { user } = props
-     
+
 //   return (
 //     <>
 //       <p>Hello, {user}</p>
@@ -27,7 +27,7 @@
 
 // export default Greeting
 
-const Greeting = ({ user, age = 10 }) => {   
+const Greeting = ({ user, age = 10 }) => {
   return (
     <>
       <p>Hello, {user}. You are {age}</p>
@@ -35,4 +35,13 @@ const Greeting = ({ user, age = 10 }) => {
   )
 }
 
+
+Greeting.propTypes = {
+  user: PropTypes.string.isRequired,
+  age: PropTypes.number
+}
+
 export default Greeting
+
+
+

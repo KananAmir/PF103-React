@@ -1,16 +1,17 @@
 
 import './App.css'
 import Button from './components/Button'
+import ChildA from './components/ChildA'
 // import Banner from './components/Banner'
 import Greeting from './components/Greeting'
 import Input from './components/Input'
 import Products from './components/Products'
 import Services from './components/Services'
 import Users from './components/Users'
-import {users as usersArr} from './data/index'
+import { users as usersArr } from './data/index'
 
 function App() {
-  const products = [
+    const products = [
         {
             "id": 1,
             "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -252,36 +253,36 @@ function App() {
             }
         }
     ]
-  return (
-    <>
-      {/* <h1 class="text-3xl font-bold underline text-red-600">
-        Hello world!
-      </h1> */}
-      <hr />
-      <Button text={"Sign Up"}/>
-      <hr />
-      {/* <Input placeholder={"search here.."}/> */}
-      <Input placeholder={"email"} type={"email"} color={"orange"}/>
-      <Input placeholder={"password"} type={"password"} color={"red"}/>
-      <Input placeholder={"username"} type={"text"} />
-      <Greeting user={"Gunel"} age={19} />
-      <Greeting user={"Azif"} />
-      <hr />
-      {/* <Banner /> */}
-      <hr />
-      <Services />
-      <hr />
-      <Products products={products} />
-      <Users users={usersArr}/>
 
-    </>
-  )
+    const studentName = "Zaur"
+
+    return (
+        <>
+            <ChildA sName={studentName} />
+            {/* <h1 class="text-3xl font-bold underline text-red-600">
+                Hello world!
+            </h1> */}
+            <hr />
+            <Button text={"Sign Up"} />
+            <hr />
+            {/* <Input placeholder={"search here.."}/> */}
+            <Input placeholder={"email"} type={"email"} color={"orange"} />
+            <Input placeholder={"password"} type={"password"} color={"red"} />
+            <Input placeholder={"username"} type={"text"} />
+            <Greeting user={"Gunel"} age={19} />
+            <Greeting user={"Azif"} />
+            <hr />
+            {/* <Banner /> */}
+            <hr />
+            <Services />
+            <hr />
+            <Products products={products} />
+            <Users users={usersArr} />
+        </>
+    )
 }
 
 export default App
-
-
-
 
 // function sayHi(username){
 //   return `Hello, ${username}`
