@@ -10,6 +10,8 @@ const Card = () => {
     //     console.log("Card Mounted");
     //  }, [])
 
+    //  console.log("Card Rendered");
+     
     // useEffect(() => {
     //     console.log("Card Mounted");
 

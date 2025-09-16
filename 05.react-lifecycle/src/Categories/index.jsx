@@ -45,7 +45,7 @@ const Categories = () => {
                 <tbody>
                         {
                             categories.map((c)=>{
-                                return (<tr>
+                                return (<tr key={c.id}>
                                     <td>{c.id}</td>
                                     <td>{c.name}</td>
                                     <td>{c.description}</td>
