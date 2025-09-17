@@ -14,6 +14,8 @@ function Movies() {
         imdb: 0.0
     })
 
+    const [editStatus, setEditStatus] = useState(false)
+
     const notify = () => toast('Movie posted successfully!', {
         position: "top-right",
         autoClose: 3000,
@@ -72,18 +74,59 @@ function Movies() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        if (!movie.title && !movie.description && !movie.imdb && !movie.releaseYear && !movie.posterSrc) {
+            toast('All inputs must be filled!', {
+                style: {
+                    backgroundColor: "black"
+                },
+                // delay: 2000,
+                autoClose: 1000,
+            })
+            return
+        }
+
         try {
-            const response = await axios.post("http://localhost:8080/movies", movie)
-            if (response.status === 201) {
-                setMovies([...movies, response.data])
-                // getMovies()
-                notify()
+            if (!editStatus) {
+
+                const response = await axios.post("http://localhost:8080/movies", movie)
+                if (response.status === 201) {
+                    setMovies([...movies, response.data])
+                    // getMovies()
+                    notify()
+                }
+            } else {
+                const response = await axios.put(`http://localhost:8080/movies/${movie.id}`, movie)
+                console.log(response);
+                if (response.status === 200) {
+                    toast('Movie updated successfully!!')
+                    //  getMovies()
+
+                    const idx = movies.findIndex((q) => q.id == movie.id)
+
+                    movies.splice(idx, 1, movie)
+
+                    // setMovies(movies)
+                    setMovies([...movies])
+                }
             }
+
+
+            setEditStatus(false)
+            resetForm()
 
         } catch (error) {
             console.log(error.message);
         }
+    }
+    const resetForm = () => {
+        setMovie({
+            title: "",
+            releaseYear: 0,
+            posterSrc: "",
+            description: "",
+            imdb: 0.0
 
+        })
     }
     useEffect(() => {
         getMovies()
@@ -114,6 +157,7 @@ function Movies() {
                             onChange={(e) => {
                                 setMovie({ ...movie, title: e.target.value })
                             }}
+                            value={movie.title}
                         />
                     </div>
                     <div className="mb-5">
@@ -129,6 +173,7 @@ function Movies() {
                             onChange={(e) => {
                                 setMovie({ ...movie, releaseYear: e.target.value })
                             }}
+                            value={movie.releaseYear}
                         />
                     </div>
                     <div className="mb-5">
@@ -144,6 +189,7 @@ function Movies() {
                             onChange={(e) => {
                                 setMovie({ ...movie, posterSrc: e.target.value })
                             }}
+                            value={movie.posterSrc}
                         />
                     </div>
 
@@ -160,6 +206,7 @@ function Movies() {
                             onChange={(e) => {
                                 setMovie({ ...movie, description: e.target.value })
                             }}
+                            value={movie.description}
                         />
                     </div>
                     <div className="mb-5">
@@ -178,11 +225,12 @@ function Movies() {
                             onChange={(e) => {
                                 setMovie({ ...movie, imdb: e.target.value })
                             }}
+                            value={movie.imdb}
                         />
                     </div>
 
                     <button className="block w-full bg-blue-500 text-blue-700 font-bold p-4 rounded-lg">
-                        Submit
+                        {!editStatus ? "Add" : "Update"}
                     </button>
                 </form>
 
@@ -224,10 +272,19 @@ function Movies() {
                             <td className="px-6 py-4 whitespace-nowrap">{movie.genre || <span className="text-red-400">no genre</span>}</td>
                             <td className="px-6 py-4 whitespace-nowrap">{movie.imdb}</td>
                             <td className="px-6 py-4 whitespace-nowrap" title={movie.description}>
-                                {movie.description.slice(0, 30)}...
+                                {movie.description?.slice(0, 30)}...
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
-                                <button className="text-indigo-600 hover:text-indigo-900">Edit</button>
+                                <button className="text-indigo-600 hover:text-indigo-900"
+                                    onClick={() => {
+                                        setEditStatus(true)
+                                        setMovie(movie)
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: "smooth"
+                                        })
+                                    }}
+                                >Edit</button>
                                 <button className="ml-2 text-red-600 hover:text-red-900" onClick={() => {
                                     handleDeleteMovie(movie.id)
                                 }}>Delete</button>
