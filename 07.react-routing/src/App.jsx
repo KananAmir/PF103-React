@@ -7,6 +7,7 @@ import Header from './layout/Header'
 import Footer from './layout/Footer'
 import Categories from './pages/Categories'
 import CategoryDetail from './pages/CategoryDetail'
+import NotFound from './pages/NotFound'
 
 function App() {
 
@@ -19,6 +20,11 @@ function App() {
         <Route path='/contact' element={<ContactPage/>}/>
         <Route path='/categories' element={<Categories/>}/>
         <Route path='/categories/:id' element={<CategoryDetail/>}/>
+
+
+
+        {/* <Route path='*' element={<h1>Not Found</h1>}/> */}
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
       <Footer/>
     </>

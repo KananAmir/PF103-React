@@ -10,11 +10,22 @@ function CategoryDetail() {
     const { id } = useParams()
     const navigate = useNavigate()
 
-    console.log(id);
+    // console.log(id);
 
+    // const getCategory = async () => {
+    //     try {
+    //         const response = await axios(`${BASE_URL}/categories/${id}`)
+    //         setCategory(response.data)
+    //     } catch (error) {
+    //         console.log(error.message);
 
+    //     }
+    // }
 
-    const getCategory = async () => {
+    useEffect(() => {
+        // getCategory()
+        (async()=>{
+            {
         try {
             const response = await axios(`${BASE_URL}/categories/${id}`)
             setCategory(response.data)
@@ -23,11 +34,12 @@ function CategoryDetail() {
 
         }
     }
-
-    useEffect(() => {
-        getCategory()
+        })()
     }, [id])
 
+
+    // IIFE
+    // (()=>{})()
 
 
     if (!category) {
