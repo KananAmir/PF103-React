@@ -8,6 +8,7 @@ import Footer from './layout/Footer'
 import Categories from './pages/Categories'
 import CategoryDetail from './pages/CategoryDetail'
 import NotFound from './pages/NotFound'
+import AddCategory from './pages/AddCategory'
 
 function App() {
 
@@ -18,8 +19,15 @@ function App() {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/about' element={<AboutPage/>}/>
         <Route path='/contact' element={<ContactPage/>}/>
-        <Route path='/categories' element={<Categories/>}/>
-        <Route path='/categories/:id' element={<CategoryDetail/>}/>
+        {/* <Route path='/categories' element={<Categories/>}/> */}
+        {/* <Route path='/categories/:id' element={<CategoryDetail/>}/> */}
+
+        {/* nested routes */}
+        <Route path='/categories'>
+          <Route index element={<Categories/>}/>
+          <Route path='new' element={<AddCategory/>}/>
+          <Route path=':id' element={<CategoryDetail/>}/>
+        </Route>
 
 
 
